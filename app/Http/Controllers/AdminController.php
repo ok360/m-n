@@ -8,8 +8,7 @@ class AdminController extends Controller
 {
     public function index ()
     {
-        $names = [];
-        return view('admin',compact ('names'));
+        return view('admin');
     }
     public function login()
     {

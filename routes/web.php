@@ -12,12 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout.master');
 });
 
 Route::get('admin','AdminController@index');
 
 Route::get('login','AdminController@login');
+
 
 
 
