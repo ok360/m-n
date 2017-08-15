@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','StudentController@index');
+Route::resource('/student','StudentController');
 
 Route::group(['prefix'=>'admin'],function(){
 
@@ -32,9 +32,6 @@ Route::get('login','AdminController@login');
 //Route::edit('user/edit/{id}','UserController@edit');
 //Route::put('user/{id}','UserController@update');
 //Route::delete('user/{id}','UserController@destroy');
-
-Route::resource('user','UserController');
-
 
 
 
