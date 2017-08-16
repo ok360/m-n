@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Student;
 use Illuminate\Http\Request;
 
+
 class StudentController extends Controller
 {
     /**
@@ -15,7 +16,6 @@ class StudentController extends Controller
     public function index()
     {
         $students= Student::all ();
-
         return view ('student.index',compact ('students'));
     }
 
@@ -66,9 +66,12 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Student $student)
     {
-        //
+//        $student =  Student::find($id);
+
+        return view('student.edit',compact('student'));
+
     }
 
     /**
@@ -80,7 +83,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->name= $request->name;
+        $student->class= $request->class;
+        $student->save();
+        return redirect ('student');
     }
 
     /**
@@ -91,6 +98,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::destroy ($id);
+        return back ()->with (['success'=>'Record Deleted Successfully']);
     }
 }

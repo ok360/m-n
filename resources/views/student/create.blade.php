@@ -5,11 +5,12 @@
 
 
 <h1>Create Student Record</h1>
-        <form action="{{url ('student')}}" method="post">
-            {{csrf_field ()}}
-            Name:<input type="text" name="name"><br>
-            Class:<input type="text" name="class"><br>
-            <input type="submit">
-        </form>
+
+        {!! Form::open(['url'=>'student','method'=>'post'])  !!}
+        Name:<input type="text" name="name"><br>
+        Class:<input type="text" name="class"><br>
+        <input type="submit">
+         {!! Form::close() !!}
+
     </div>
 @endsection

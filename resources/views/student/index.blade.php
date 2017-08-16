@@ -16,12 +16,19 @@
         <th>Id</th>
         <th>Name</th>
         <th>Class</th>
+        <th>Action</th>
     </tr>
     @foreach($students as $student)
         <tr>
             <td>{{$student->id}}</td>
             <td>{{$student->name}}</td>
             <td>{{$student->class}}</td>
+            <td>
+                {!! Form::open(['url'=>['student/'.$student->id],'method'=>'delete']) !!}
+                <a href="{{url('student/'.$student->id.'/edit')}}" class="btn btn-info">Edit</a>
+                {!! Form::submit('Delete') !!}
+                {!! Form::close() !!}
+            </td>
         </tr>
     @endforeach
 </table>
