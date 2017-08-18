@@ -3,7 +3,6 @@
 @section('body')
     <div class="col-md-9">
 
-
 <h1>Student Record</h1>
         <a href="{{url('student/create')}}">Create</a>
           @if(session ('success'))
@@ -11,6 +10,7 @@
             <p>{{session ('success')}}</p>
             </div>
             @endif
+        {{$students->links()}}
 <table class="table table-responsive">
     <tr>
         <th>Id</th>
@@ -32,5 +32,6 @@
         </tr>
     @endforeach
 </table>
+        {{$students->links()}}
     </div>
 @endsection

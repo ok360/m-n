@@ -10,17 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',function (){
+    return view('welcome');
+});
 
-Route::resource('/student','StudentController');
 
-Route::group(['prefix'=>'admin'],function(){
 
-    Route::get('/','AdminController@index');
+//Route::group(['prefix'=>'admin'],function(){
+
+//    Route::get('/','AdminController@index');
 //    Route::get('product','AdminController@index');
 //    Route::get('product/create','AdminController@index');
 //    Route::get('product/edit','AdminController@index');
 
-});
+//});
 
 
 Route::get('login','AdminController@login');
@@ -32,6 +35,20 @@ Route::get('login','AdminController@login');
 //Route::edit('user/edit/{id}','UserController@edit');
 //Route::put('user/{id}','UserController@update');
 //Route::delete('user/{id}','UserController@destroy');
+
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware'=>'admin'],function () {
+
+    Route::get('admin','AdminController@index');
+    Route::resource('/student','StudentController');
+
+});
 
 
 
