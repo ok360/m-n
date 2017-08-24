@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use App\Nic;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students= Student::paginate (9);
+//             $nic = Nic::with ('student')->pluck ('nic_no');
+//        return dd ($nic);
+
+
+        $students= Student::with ('nic')->orderBy ('name','desc')->paginate (9);
+
         return view ('student.index',compact ('students'));
     }
 
@@ -43,6 +50,16 @@ class StudentController extends Controller
                 $student->name=$request->name;
                 $student->class= $request->class;
                 $student->save ();
+                $nic=new Nic();
+                $data=[
+                    'name'=>$request->name
+                    ];
+         
+            Mail::send('emails.student-reg',$data,function ($message)
+            {
+                $message->to('test@gmail.com');
+                $message->from('from@gmail.com');
+            });
 
             return redirect ('student')->with ('success','Record created Successfully');
 
@@ -100,5 +117,12 @@ class StudentController extends Controller
     {
         Student::destroy ($id);
         return back ()->with (['success'=>'Record Deleted Successfully']);
+    }
+    public function test()
+    {
+
+         $students = Student::with ('subjects','nic')->take(4)->get ();
+//         return dd ($students);
+        return view('student.test',compact ('students'));
     }
 }

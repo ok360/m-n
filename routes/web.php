@@ -16,6 +16,10 @@ Route::get('/',function (){
 
 
 
+Route::get('image','ImageController@index');
+
+Route::post('image','ImageController@store');
+
 //Route::group(['prefix'=>'admin'],function(){
 
 //    Route::get('/','AdminController@index');
@@ -38,15 +42,18 @@ Route::get('login','AdminController@login');
 
 
 
+Route::resource('/student','StudentController');
+
+Route::get('test','StudentController@test');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 Route::group(['middleware'=>'admin'],function () {
 
     Route::get('admin','AdminController@index');
-    Route::resource('/student','StudentController');
 
 });
 
